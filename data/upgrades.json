@@ -1,0 +1,25 @@
+{
+    "upgrades":
+    [
+        {
+            "name": "Flux Capacitor",
+            "image":"flux-cap.png",
+            "link":""
+        },
+        {
+            "name": "Flame Decals",
+            "image":"flame.jpg",
+            "link":""
+        },
+        {
+            "name": "Bumper Stickers",
+            "image":"bumper_sticker.jpg",
+            "link":""
+        },
+        {
+            "name": "Hub Caps",
+            "image": "hub-cap.jpg",
+            "link":""
+        }
+    ]
+}

@@ -1,1 +1,32 @@
-<h1>Stacy</h1>
+<h1>Welcome to CSE Motors!</h1>
+<div class="hero">
+    <img src="/images/vehicles/delorean.jpg" alt="Delorean" height="255" width="500">
+    <div class="description">
+        <div>DMC Delorean</div>
+        <div>3 Cup holders</div>
+        <div>Superman doors</div>
+        <div>Fuzzy dice!</div>
+        <button>Own Today</button>
+    </div>
+</div>
+<div class="main-across">
+    <div class="upgrades">
+        <h2>Delorean Upgrades</h2>
+        <div class="upgrade-items">
+        <% upgrades.forEach( (upgrade) => { %>
+            <div class="upgrade-item">
+                <img src="/images/upgrades/<%= upgrade.image %>" alt="test" height="55" width="55">
+                <p><%= upgrade.name %></p>
+            </div>
+        <% }) %>
+        </div>
+    </div>
+    <div class="reviews">
+                <h2>DMC Delorean Reviews</h2>
+        <ul>
+        <% reviews.forEach( (review) => { %>
+            <li><%= review.text %> (<%= review.stars %>/5)</li>
+        <% }) %> 
+        </ul>
+    </div>
+</div>

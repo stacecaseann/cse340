@@ -10,7 +10,9 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config()
 const app = express() //express as a function is defined to app variable
 const static = require("./routes/static")
-
+const reviewsData = require("./data/reviews.json")
+const upgradesData = require("./data/upgrades.json")
+console.log(upgradesData.upgrades); 
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -25,7 +27,12 @@ app.use(static) //takes the routes/static config and applies to the application
 
 //Index route
 app.get("/", function(req, res){
-  res.render("index", {title: "Home"})
+  res.render("index", {
+    title: "Home",
+    reviews : reviewsData.reviews,
+    upgrades: upgradesData.upgrades
+    
+  })
 })
 //The express application will watch the get object for a particular route. / is the route being satched
 //function(req, res) = js function that takes request and response as parameters

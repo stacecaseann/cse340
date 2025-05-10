@@ -1,0 +1,25 @@
+{
+    "reviews":
+    [
+        {
+            "text": "So fast, it's almost like travelling in time.",
+            "stars":4
+        },
+        {
+            "text": "Coolest ride on the road.",
+            "stars":4
+        },
+        {
+            "text": "I'm feeling McFly!",
+            "stars":5
+        },
+        {
+            "text": "The most futuristic ride of our day.",
+            "stars":4.5
+        },
+        {
+            "text": "80's livin and I love it!",
+            "stars":5
+        }
+    ]
+}
