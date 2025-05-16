@@ -3,24 +3,41 @@ header {
   position: relative;
   height: 100px;
   width: 100%;
-  color: white;
+  color: var(--off-white);
   font-size: 1.5rem;
   font-family: var(--header-font);
   overflow: hidden;
-  background:var(--dark-green);
-  font: var(--off-white);
+  background:var(--dark-grey);
+  /* font: var(--off-white); */
   display:grid;
   grid-template-columns: auto 25%;
   align-items: center;
   padding: 1rem;
   justify-content: space-between;
+
 }
 header a{
   text-decoration: none;
   color: var(--off-white);
 }
+header a:hover{
+  font-weight: bold;
+  transform: translateY(2px);
+  transform: translateX(2px);
+}
+
+#tools
+{
+  display: flex;
+  justify-content: right;
+}
+#tools a
+{
+  font-size: 1.2rem;
+  text-align: right;
+}
 nav {
-  background-color: var(--light-pink);
+  background-color: var(--red);
   max-width: 100%;
   padding: var(--padding);
   color: white;
@@ -32,13 +49,14 @@ nav ul {
   flex-direction: row;
   justify-content: center; /* center the whole group */
   align-items: center;
-  gap: 5rem;
+  gap: 1rem;
   list-style: none;
   width: 100%;
   padding: 10px;
   margin: 0;
   flex-wrap: wrap; /* allow wrapping on small screens */
   box-sizing: border-box;
+  transition: gap .3s ease;
   /* text-align: center; */
 }
 nav a {
@@ -47,4 +65,9 @@ nav a {
 }
 .active {
   font-weight: bold;
+}
+a:hover {
+  font-weight: bold;
+  transform: translateY(2px);
+  transform: translateX(2px);
 }

@@ -1,4 +1,6 @@
+
 <h1>Welcome to CSE Motors!</h1>
+<div class="hero-container">
 <div class="hero">
     <img src="/images/vehicles/delorean.jpg" alt="Delorean" height="255" width="500">
     <div class="description">
@@ -9,6 +11,7 @@
         <button>Own Today</button>
     </div>
 </div>
+</div>
 <div class="main-across">
     <div class="upgrades">
         <h2>Delorean Upgrades</h2>
@@ -16,7 +19,7 @@
         <% upgrades.forEach( (upgrade) => { %>
             <div class="upgrade-item">
                 <img src="/images/upgrades/<%= upgrade.image %>" alt="test" height="55" width="55">
-                <p><%= upgrade.name %></p>
+                <a href="#"><p><%= upgrade.name %></p></a>
             </div>
         <% }) %>
         </div>

@@ -1,42 +1,102 @@
 :root {
   --padding: 1rem;
-  --dark-green: #193819;
-  --light-green: #b0c4b1;
-  --light-gray: #dedbd2;
-  --light-pink: #f7e1d7;
-  --dark-pink: #edafb8;
-  --off-white: #fbf7f4;
-  --header-font: 'Dancing Script';
-  --normal-font: 'Playfair Display';
+  --red: #cc0000; 
+  --dark-grey: #333138;
+  --black: #000103;
+  --bright-green: #126936;
+  --off-white: #FFFFFF;
+  --header-font: 'Domine','Times New Roman', serif;
+  --normal-font: 'Forum',Arial, sans-serif;;
+}
+body{
+    margin: 0;
+  padding: 50px;
+  height: 100%;
+  background-image: url('../images/site/small_check.jpg');
+    background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+    display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Ensure full screen height */
+  box-sizing: border-box;
+  font-family: var(--normal-font);
+}
+h1,h2,h3{
+    text-align: center;
+  font-family: var(--header-font);
+}
+.wrapper{
+  width: 100%;
+  /* margin:10px; */
+  align-items: center;
+      max-width: 1200px; 
+      min-width: 400px;
+  background-color: white;
+  padding: 0;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Optional: shadow for depth */
+  border-radius: 8px; /* Optional: rounded corners */
+  box-sizing: border-box;
+}
+main{
+  padding: 20px;
+}
+h1,h2{
+  text-align: center;
+}
+.hero-container
+{
+  display:flex;
+  justify-content: center;
 }
 .hero
 {
   position: relative;
+  display:inline-block;
 }
 .hero img{
-  width: 100%;
-  height: 100%;
+  width: 500px;
+  height: auto;
   display: block;
+  padding: 25px;
 }
 .hero .description{
   position:absolute;
-  top: 0;
-  left: 0;
+  top: 20px;
+  left: 20px;
+  padding: 10px;
   /* width: 100%; */
-  height: 300px;
+  /* height: 300px; */
+  font-size: 1.2rem;
+  background-color: rgba(255, 255, 255, 0.85); 
 }
 .description {
   display: flex;
   flex-direction: column;
+  line-height: 1.6;
+}
+.description button{
+  margin: 5px;
+  padding: 5px;
 }
 .main-across
 {
   display:grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
 }
 .upgrades{
   display: flex;
   flex-direction: column;
+  justify-content: center;
+}
+.reviews{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;  
+  align-items: center; 
+  line-height: 1.6; 
 }
 .upgrade-items{
   display:grid;
@@ -47,8 +107,20 @@
 }
 .upgrade-item{
   display:flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--bright-green);
+  width: 150px;
+  padding: 5px;
+}
+.upgrade-item a{
+  text-decoration: none;
+  color: var(--off-white);
+}
+.upgrade-item img{
+    margin-top: 5px;
+
 }
 /******* Change Box Model ***************/
 *,
@@ -61,5 +133,6 @@ footer{
   display:flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--light-pink);
+  background-color: var(--red);
+  color: var(--off-white);
 }
