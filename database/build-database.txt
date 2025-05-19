@@ -420,4 +420,20 @@ VALUES   (
     5
   );
 
+UPDATE PUBLIC.INVENTORY
+SET INV_DESCRIPTION = REPLACE(INV_DESCRIPTION,
+		'small interiors',
+		'a huge interior'
+	)
+WHERE
+	INV_ID = 10;
 
+UPDATE PUBLIC.INVENTORY
+SET INV_IMAGE = REPLACE(INV_IMAGE,
+		'images/',
+		'images/vehicles/'
+	),
+	INV_THUMBNAIL = REPLACE(INV_THUMBNAIL,
+		'images/',
+		'images/vehicles/'
+	);

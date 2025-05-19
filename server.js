@@ -10,9 +10,8 @@ const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config()
 const app = express() //express as a function is defined to app variable
 const static = require("./routes/static")
-const reviewsData = require("./data/reviews.json")
-const upgradesData = require("./data/upgrades.json")
-console.log(upgradesData.upgrades); 
+
+const baseController = require("./controllers/baseController")
 /* ***********************
  * View Engine and Templates
  *************************/
@@ -26,14 +25,7 @@ app.set("layout", "./layouts/layout") // not at views root, when the express ejs
 app.use(static) //takes the routes/static config and applies to the application
 
 //Index route
-app.get("/", function(req, res){
-  res.render("index", {
-    title: "Home",
-    reviews : reviewsData.reviews,
-    upgrades: upgradesData.upgrades
-    
-  })
-})
+app.get("/", baseController.buildHome)
 //The express application will watch the get object for a particular route. / is the route being satched
 //function(req, res) = js function that takes request and response as parameters
 //res.render() response object, render is an express function that will retrieve the index view
