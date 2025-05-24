@@ -12,7 +12,7 @@ body{
     margin: 0;
   padding: 50px;
   height: 100%;
-  background-image: url('../images/site/small_check.jpg');
+  background-image: none;
     background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -90,6 +90,7 @@ h1,h2{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  order: 2;
 }
 .reviews{
   display: flex;
@@ -97,6 +98,7 @@ h1,h2{
   justify-content: flex-start;  
   align-items: center; 
   line-height: 1.6; 
+  order:1;
 }
 .upgrade-items{
   display:grid;
