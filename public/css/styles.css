@@ -198,3 +198,14 @@ footer a {
   text-decoration: none;
   color: var(--off-white);
 }
+/***** Error messages *****/
+.notice
+{
+  font-size: 1.5rem;
+  color: var(--bright-green)
+}
+.error
+{
+  font-size: 1.5rem;
+  color: red;
+}

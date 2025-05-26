@@ -16,12 +16,42 @@ const mockErrorRoute = require("./routes/mockErrorRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 
+//week 4
+const session = require("express-session")
+//don't store in memory, store in a db- connect-pg-simple
+//
+const pool = require('./database/')
+
 /* ***********************
  * View Engine and Templates
  *************************/
 app.set("view engine", "ejs")//ejs will be the view engine, all views stored in a views folder
 app.use(expressLayouts)//use the exxpress-ejs-layouts
 app.set("layout", "./layouts/layout") // not at views root, when the express ejs layout looks for the basic template, it will find a layouts folder , template named layout
+
+//week 4
+/* ****************
+* Middleware
+* *****************/
+app.use(session({
+  //store is where the session data will be store, in connect-pg-simple pakcage
+  store: new (require('connect-pg-simple')(session))({//create session table
+    createTableIfMissing: true,
+    pool,
+}),
+secret:process.env.SESSION_SECRET,//will protect the session
+resave: true,//bc we are using "flash messages', usually it's false
+saveUninitialized: true,
+name: 'sessionId',//name of the unique session id
+}))
+
+//Express Messages Middleware
+app.use(require('connect-flash')())
+app.use(function(req, res, next)
+{
+  res.locals.messages = require('express-messages')(req, res)
+  next()//passes control to the next piece of middleware
+})
 
 /* ***********************
  * Routes
