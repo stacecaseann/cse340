@@ -85,6 +85,7 @@ h1,h2{
 {
   display:grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 .upgrades{
   display: flex;
@@ -124,17 +125,72 @@ h1,h2{
     margin-top: 5px;
 
 }
+/********* Inv display ******/
+.inv-display
+{
+  display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  justify-items: center;
+}
+.inv-item{
+  display: flex;
+  /* flex: 1; */
+  flex-direction: column;
+  justify-content:center;
+  align-content: center;
+  background-color: var(--off-white);
+  /* overflow:hidden; */
+  border-radius: 1rem;
+    box-shadow:
+    0 4px 10px rgba(0, 0, 0, 0.15),
+    0 10px 25px rgba(0, 0, 0, 0.2);
+      transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+  padding: 1rem;
+  box-sizing: border-box;
+  width: 100%;
+}
+.image-container
+{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+.namePrice
+{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
 *:after {
   box-sizing: border-box;
 }
-
+hr {
+  border: none;
+  height: 2px;
+  background-color: var(--dark-grey);
+  width: 100%;
+  display: block;
+  margin: 20px auto;
+}
+.highlight
+{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
 footer{
   display:flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding:5px;
   background-color: var(--red);
   color: var(--off-white);
 }

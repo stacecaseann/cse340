@@ -31,14 +31,14 @@ Util.getNav = async function (req, res, next) {
 Util.buildClassificationGrid = async function(data){
   let grid
   if(data.length > 0){
-    grid = '<ul id="inv-display">'
+    grid = '<div id="inv-display" class="inv-display">'
     data.forEach(vehicle => { 
-      grid += '<li>'
+      grid += '<div class="inv-item">'
       grid +=  '<a href="../../inv/detail/'+ vehicle.inv_id 
       + '" title="View ' + vehicle.inv_make + ' '+ vehicle.inv_model 
-      + 'details"><img src="' + vehicle.inv_thumbnail 
+      + 'details"><div class="image-container"><img src="' + vehicle.inv_thumbnail 
       +'" alt="Image of '+ vehicle.inv_make + ' ' + vehicle.inv_model 
-      +' on CSE Motors" /></a>'
+      +' on CSE Motors" /></div></a>'
       grid += '<div class="namePrice">'
       grid += '<hr />'
       grid += '<h2>'
@@ -49,9 +49,38 @@ Util.buildClassificationGrid = async function(data){
       grid += '<span>$' 
       + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</span>'
       grid += '</div>'
-      grid += '</li>'
+      grid += '</div>'
     })
-    grid += '</ul>'
+    grid += '</div>'
+  } else { 
+    grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
+  }
+  return grid
+}
+
+/* **************************************
+* Build the inventory detail view HTML
+* ************************************ */
+Util.buildInvDetailGrid = async function(data){
+  let grid
+  if(data.length > 0){
+    let details = data[0]
+    grid = '<div class="inv-details">'     
+      grid += '<h2>' + details.inv_year + ' ' +  details.inv_make + ' ' + details.inv_model + '</h2>'
+      grid += '<div class="main-across">'
+      grid += '<div>'
+      grid += '<img src="' + details.inv_image
+      +'" alt="Image of '+ details.inv_make + ' ' + details.inv_model 
+      +' on CSE Motors">'
+      grid += '</div>'
+      grid += '<div><h3>' +  details.inv_make + ' ' + details.inv_model + ' Details</h3>'
+      grid += '<p><span class="highlight">Price:</span> $' + new Intl.NumberFormat('en-US').format(details.inv_price) + '</p>'
+      grid += '<p><span class="highlight">Description:</span> ' + details.inv_description + '</p>'
+      grid += '<p><span class="highlight">Color:</span> ' + details.inv_color + '</p>'
+      grid += '<p><span class="highlight">Miles:</span> ' + new Intl.NumberFormat('en-US').format(details.inv_miles) + '</p>'
+      grid += '</div>'
+      grid += '</div>'  
+      grid += '</div>'
   } else { 
     grid += '<p class="notice">Sorry, no matching vehicles could be found.</p>'
   }
