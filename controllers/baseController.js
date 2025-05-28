@@ -17,7 +17,7 @@ baseController.buildHome = async function(req, res){
   res.render("index", {title: "Home", nav,
         reviews : reviewsData.reviews,
     upgrades: upgradesData.upgrades
-  })
+    })
   //ejs to sends the index view back to the client
 }
 

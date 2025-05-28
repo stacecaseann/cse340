@@ -8,13 +8,16 @@
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts");
 const env = require("dotenv").config()
-const app = express() //express as a function is defined to app variable
+const app = express()
 const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const invDetailRoute = require("./routes/inventoryDetailRoute")
 const mockErrorRoute = require("./routes/mockErrorRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
+const accountRoute = require("./routes/accountRoute")
+
+
 
 //week 4
 const session = require("express-session")
@@ -73,10 +76,14 @@ app.use("/inv", invDetailRoute)
 
 //Mock Error route
 app.use("/inv", mockErrorRoute)
+
+//Account route
+app.use("/account", accountRoute)
 // File Not Found Route - must be last route in list
 app.use(async (req, res, next) => {
   next({status: 404, message: 'Sorry, we appear to have lost that page.'})
 })
+
 
 /* ***********************
 * Express Error Handler
