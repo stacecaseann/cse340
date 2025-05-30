@@ -1,0 +1,66 @@
+
+<% if (title) { %>
+<h1><%= title %></h1>
+<% } else {
+  res.redirect('/')
+} %>
+
+<% messages() %>
+
+<% if (errors) { %>
+  <ul class="notice">
+ <% errors.array().forEach(error => { %>
+   <li><%= error.msg %></li>
+<%  }) %>
+ </ul>
+<% } %>
+
+<form method="post" action="/account/register">
+    <fieldset>
+        <label>First name<span class="required">*</span>
+        <input
+            type="text"
+            name="account_firstname"
+           id="accountFirstname"
+            required
+           value="<%= locals.account_firstname %>"            
+            autocomplete="given-name"
+            title="Enter your first name"
+        />
+        </label>
+        <label>Last name<span class="required">*</span>
+        <input
+            type="text"
+            name="account_lastname"
+            id="accountLastname"
+            required
+            value="<%= locals.account_lastname %>"
+            autocomplete="family-name"
+            title="Enter your last name"
+        />
+        </label>
+        <label>Email<span class="required">*</span>
+            <input type="email" 
+            name="account_email" 
+            id="accountEmail" 
+            required 
+            autocomplete="email" 
+           value="<%= locals.account_email %>"   
+            title="Enter your email address" 
+            placeholder="Enter a valid email address"> />
+        </label>
+        <label>Password<span class="required">*</span>
+            <%#<span>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</span> %>
+            <input type="password" name="account_password" 
+            id="accountPassword" 
+            required          
+            autocomplete="current-password" 
+            title="Enter your password"
+            />
+        </label>
+        <input type="submit" value="Register" />
+    </fieldset>
+</form>
+<%# 
+https://www.youtube.com/watch?v=4vIkaZ1qb74&t=48s
+ %>

@@ -7,18 +7,21 @@
 
 <% messages() %>
 
-<form method="post" action="login.html" id="login-form">
+<form method="post" action="/account/login" id="loginForm">
     <fieldset>
         <label>Email<span class="required">*</span>
             <input type="email" name="account_email" id="account_email" required autocomplete="email" title="Enter your email address" />
         </label>
         <label>Password<span class="required">*</span>
-            <input type="password" name="account_password" id="account_password" required autocomplete="current-password" title="Enter your password" />
+            <input type="password" name="account_password" id="account_password" required autocomplete="current-password" title="Enter your password"
+            <%#pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
+            %>
+            />
         </label>
         <input type="submit" value="Login" />
     </fieldset>
 </form>
-<p>No account? <a href="sign-up.html">Sign-up</a></p>
+<p>No account? <a href="register">Sign-up</a></p>
 <%# 
 1) email field 
 account_email
@@ -26,5 +29,5 @@ account_email
 account_password
 3) Submit button 
 Login 
-4) No account? Sign-up href
+4) No account?  href
  %>

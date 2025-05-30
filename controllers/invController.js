@@ -17,6 +17,7 @@ invCont.buildByClassificationId = async function (req, res, next) { //next is Ex
         title: className + " vehicles",
         nav,
         grid,
+        errors: null,
     })
 }
 

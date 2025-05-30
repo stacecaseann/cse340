@@ -16,7 +16,8 @@ baseController.buildHome = async function(req, res){
   //added as a class to the unordered list. write css rules using these classes to style the messages
   res.render("index", {title: "Home", nav,
         reviews : reviewsData.reviews,
-    upgrades: upgradesData.upgrades
+    upgrades: upgradesData.upgrades,
+    errors: null,
     })
   //ejs to sends the index view back to the client
 }

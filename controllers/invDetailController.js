@@ -16,6 +16,7 @@ invDetailCont.buildByInvId = async function (req, res, next) {
         title: invTitle,
         nav,
         grid,
+        errors: null,
     })
 }
 

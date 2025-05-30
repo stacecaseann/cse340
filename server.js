@@ -16,6 +16,7 @@ const mockErrorRoute = require("./routes/mockErrorRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
 const accountRoute = require("./routes/accountRoute")
+const bodyParser = require("body-parser")
 
 
 
@@ -55,6 +56,12 @@ app.use(function(req, res, next)
   res.locals.messages = require('express-messages')(req, res)
   next()//passes control to the next piece of middleware
 })
+
+/*
+ tells the express application to read and work with data sent via a URL as well as from a form, stored in the request object's body. The "extended: true" object is a configuration that allows rich objects and arrays to be parsed.
+*/
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
 
 /* ***********************
  * Routes
@@ -98,7 +105,8 @@ app.use(async (err, req, res, next) => {
   res.render("errors/error", {
     title: err.status || 'Server Error',
     message,
-    nav
+    nav,
+    errors: null, 
   })
 })
 
