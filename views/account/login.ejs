@@ -10,10 +10,16 @@
 <form method="post" action="/account/login" id="loginForm">
     <fieldset>
         <label>Email<span class="required">*</span>
-            <input type="email" name="account_email" id="account_email" required autocomplete="email" title="Enter your email address" />
+            <input type="email" 
+            name="account_email" 
+            id="accountEmail" 
+            required 
+            value="<%= locals.account_email %>"      
+            autocomplete="email" 
+            title="Enter your email address" />
         </label>
         <label>Password<span class="required">*</span>
-            <input type="password" name="account_password" id="account_password" required autocomplete="current-password" title="Enter your password"
+            <input type="password" name="account_password" id="accountPassword" required autocomplete="current-password" title="Enter your password"
             <%#pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
             %>
             />

@@ -166,6 +166,13 @@ h1,h2{
   justify-content: center;
   align-items: center;
 }
+/***** Forms ****/
+input:required:invalid, input:focus:invalid {
+ background-color: #ffe6e6;
+}
+input:required:valid {
+ background-color: #e6ffe6;
+}
 /******* Change Box Model ***************/
 *,
 *:before,
