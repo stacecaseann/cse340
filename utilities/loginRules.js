@@ -26,7 +26,7 @@ const validate = {}
   /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
-validate.checkRegData = async (req, res, next) => {
+validate.checkAccountData = async (req, res, next) => {
 
     //js destructuring method
   const { account_email } = req.body

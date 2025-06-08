@@ -17,7 +17,7 @@
 <div class="classification-entry">
 <h2>Classification Name</h2>
 <p>All fields are required.</p>
-<form method="post" action="/inv/vehicle-entry" id="vehicleForm">
+<form method="post" action="/inv/update" id="updateForm">
     <label>Classification
         <%- classificationList %>
     </label>  
@@ -120,5 +120,9 @@
           value="<%= locals.inv_color %>"
         />
       </label>                                    
-    <input type="submit" value="Add Vehicle" />
+    <input type="submit" name="submit" disabled value="Edit Vehicle" />
+    <input type="hidden" name="inv_id"
+<% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
+<% } %>>
 </div>
+<script src="/js/inv-update.js"></script>

@@ -3,7 +3,7 @@ const router = express.Router()
 const accountController = require("../controllers/accountController")
 const utilities = require("../utilities/")
 const regValidate = require('../utilities/account-validation')
-const loginValidate = require('../utilities/login-validation')
+const loginValidate = require('../utilities/loginRules')
 
 router.get("/login", utilities.handleErrors(accountController.buildLogin))
 router.get("/register", utilities.handleErrors(accountController.buildRegister))
@@ -16,9 +16,14 @@ router.post('/register',
 router.post(
   "/login",
     loginValidate.registrationRules(),
-    loginValidate.checkRegData,
-  (req, res) => {
-    res.status(200).send('login process')
-  }
+    loginValidate.checkAccountData,
+    utilities.handleErrors(accountController.accountLogin)
 )
+
+router.get(
+  "/",
+  utilities.checkLogin, 
+  utilities.handleErrors(accountController.buildAccountManagement))
+
+  
 module.exports = router;

@@ -5,9 +5,9 @@
   res.redirect('/')
 } %>
 
-<% messages() %>
+<%- messages() %>
 
-<form method="post" action="/account/login" id="loginForm">
+<form action="/account/login" id="loginForm" method="post">
     <fieldset>
         <label>Email<span class="required">*</span>
             <input type="email" 

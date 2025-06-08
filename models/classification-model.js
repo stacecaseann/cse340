@@ -1,7 +1,7 @@
 const pool = require("../database/")
 
 /* *****************************
-*   Register new account
+*   Register Classification
 * *************************** */
 async function createClassification(classification_name){
   try {
