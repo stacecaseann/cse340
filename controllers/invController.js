@@ -13,9 +13,10 @@ invCont.buildByClassificationId = async function (req, res, next) { //next is Ex
     const grid = await utilities.buildClassificationGrid(data)
     let nav = await utilities.getNav()
 
-    const className = data[0].classification_name
+    const className = data?.[0]?.classification_name ?? ""
+
     res.render("./inventory/classification", {
-        title: className + " vehicles",
+        title: className + " Vehicles",
         nav,
         grid,
         errors: null,
@@ -113,7 +114,7 @@ invCont.createInventoryEntry = async function(req, res, next){
         const classificationList = await utilities.buildClassificationList()
     req.flash("notice", "Sorry, the vehicle was not created.")
     res.status(501).render("inventory/vehicle-entry", {
-      title: "Add new vehicle",
+      title: "Add New Vehicle",
       nav,
       inv_make,
       inv_model,
@@ -136,7 +137,7 @@ invCont.buildVehicleCreationForm = async function (req, res, next){
     let nav = await utilities.getNav()
     const classificationList = await utilities.buildClassificationList()
     res.render("inventory/vehicle-entry", {
-        title: "Add new vehicle",
+        title: "Add New Vehicle",
         nav, 
         errors: null,
         classificationList
@@ -152,23 +153,10 @@ invCont.getInventoryJSON = async (req, res, next) => {
   if (invData.length != 0 && invData[0].inv_id) {
     return res.json(invData)
   } else {
-    next(new Error("No data returned"))
+    res.json([])
   }
 }
 
-
-// /* ***************************
-//  *  Edit inventory
-//  * ************************** */
-// invCont.getInventoryJSON = async (req, res, next) => {
-//   const inv_id = parseInt(req.params.inv_id)
-//   const invData = await invModel.getInventoryByClassificationId(classification_id)
-//   if (invData[0].inv_id) {
-//     return res.json(invData)
-//   } else {
-//     next(new Error("No data returned"))
-//   }
-// }
 
 /* ***************************
  *  Edit Inventory Form
