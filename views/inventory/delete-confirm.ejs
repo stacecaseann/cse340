@@ -16,7 +16,5 @@
     <p>Confirm Deletion - The delete is permanent.</p>
    
     <input type="submit" name="submit" value="Delete Vehicle">
-    <input type="hidden" name="inv_id"
-    <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
-    <% } %>>
+    <input type="hidden" name="inv_id" value="<%- locals.inv_id %>">
 </form>
