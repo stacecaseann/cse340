@@ -6,5 +6,9 @@
 } %>
 
 <%- messages() %>
+<h2>Welcome <%- account_firstname %></h2>
+<h3><a title="Account Management" href="/account/update/<%- account_id%>">Update Account Information</a></h3>
 
-<p>You're logged in</p>
+<% if (account_type === "Employee" ||account_type === "Admin" ){ %>
+  <h3><a title="Inventory Management" href="/inv/">Inventory Management</a></h3>
+<% } %>

@@ -35,12 +35,10 @@ const { classification_name } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav()
     res.render("inventory/classification-entry", {
       errors,
       title: "Add New Classification",
-      nav,
-      classification_name
+      classification_name,
     })
     return
   }

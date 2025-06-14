@@ -227,6 +227,7 @@ form input[type='text'],
 form textarea,
 form input[type='email'],
 form input[type='number'],
+form input[type='password'],
 form select {
   display: block;
   width: 100%;
@@ -247,7 +248,10 @@ form input[type='submit'] {
   transition: transform 0.2s ease-in-out;
   color: white;
 }
-
+.tools a
+{
+  padding: 1rem;
+}
 /******* Change Box Model ***************/
 *,
 *:before,

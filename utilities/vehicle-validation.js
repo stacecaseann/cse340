@@ -108,12 +108,10 @@ const {inv_make,
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    let nav = await utilities.getNav()
-        const classificationList = await utilities.buildClassificationList(classification_id)
+    const classificationList = await utilities.buildClassificationList(classification_id)
     res.render("inventory/vehicle-entry", {
       errors,
       title: "Edit Vehicle",
-      nav,
       inv_make,
       inv_model,
       inv_year,
@@ -124,7 +122,7 @@ const {inv_make,
       inv_miles,
       inv_color,
       classification_id,
-      classificationList
+      classificationList,
     })
     return
   }

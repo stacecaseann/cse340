@@ -20,14 +20,13 @@
         </label>
         <label>Password<span class="required">*</span>
             <input type="password" name="account_password" id="accountPassword" required autocomplete="current-password" title="Enter your password"
-            <%#pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
-            %>
             />
         </label>
         <input type="submit" value="Login" />
     </fieldset>
 </form>
 <p>No account? <a href="register">Sign-up</a></p>
+<p>No account? <a href="/account/reset-password">Reset Password</a></p>
 <%# 
 1) email field 
 account_email

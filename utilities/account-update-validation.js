@@ -1,3 +1,4 @@
+
 const { body, validationResult } = require("express-validator")
 const validate = {}
 const accountModel = require("../models/account-model")
@@ -15,7 +16,6 @@ const accountModel = require("../models/account-model")
         .notEmpty()
         .isLength({ min: 1 })
         .withMessage("Please provide a first name."), // on error this message is sent.
-  
       // lastname is required and must be string
       body("account_lastname")
         .trim()
@@ -32,18 +32,13 @@ const accountModel = require("../models/account-model")
       .isEmail()
       .normalizeEmail() // refer to validator.js docs
       .withMessage("A valid email is required.")
-      .custom(async (account_email) => {
-        const emailExists = await accountModel.checkExistingEmail(account_email)
+      .custom(async (account_email, {req}) => {
+        const account_id = req.body.account_id
+        const emailExists = await accountModel.checkExistingEmailExceptCurrent(account_email, account_id)
         if (emailExists){
           throw new Error("Email exists. Please log in or use different email")
         }
-      }),
-      // password is required and must be strong password
-      body("account_password")
-        .trim()
-        .notEmpty()
-        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$/)       
-        .withMessage("Password does not meet requirements."),
+      }),      
     ]
   }
 
@@ -54,16 +49,21 @@ const accountModel = require("../models/account-model")
 validate.checkRegData = async (req, res, next) => {
 
     //js destructuring method
-  const { account_firstname, account_lastname, account_email } = req.body
+  const { account_id, account_firstname, account_lastname, account_email } = req.body
+
   let errors = []
   errors = validationResult(req)
-  if (!errors.isEmpty()) {
-    res.render("account/register", {
+  if (errors.isEmpty())
+  {
+        res.locals.account_firstname = account_firstname
+    res.locals.account_lastname = account_lastname
+    res.locals.email = account_email
+  }
+  else {
+    res.render("account/update/" + {account_id}, {
       errors,
-      title: "Registration",
-      account_firstname,
-      account_lastname,
-      account_email,
+      title: "Update Account",
+        errors: null,
     })
     return
   }

@@ -108,6 +108,29 @@ Util.buildClassificationList = async function (classification_id = null) {
     classificationList += "</select>"
     return classificationList
   }
+
+  function verifyJwt(token, secret)
+  {
+    return new Promise((resolve, reject) => {
+      jwt.verify(token, secret, (err, account) =>
+      {
+        if (err) return reject(err)
+        resolve(account);
+      });
+    });
+  }
+
+  Util.getLoggedIn = async function (req){
+    if (!req.cookies.jwt) return null
+    try{
+      const accountData = await verifyJwt(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET)
+      return accountData
+    }
+    catch{
+      return null
+    }
+  }
+  
 /* ****************************************
  * Middleware For Handling Errors
  * Wrap other function in this for 
@@ -125,7 +148,13 @@ the wrapped function is called and attempts to fulfill its normal process, but n
 * Middleware to check token validity
 **************************************** */
 Util.checkJWTToken = (req, res, next) => {
- if (req.cookies.jwt) {
+  res.locals.loggedIn = 0;
+  res.locals.account_firstname = "";
+  res.locals.account_lastname = "";
+  res.locals.account_email = "";
+  res.locals.account_type = "None";
+  res.locals.account_id = -1;
+  if (req.cookies.jwt) {
   jwt.verify(
    req.cookies.jwt,
    process.env.ACCESS_TOKEN_SECRET,
@@ -136,7 +165,12 @@ Util.checkJWTToken = (req, res, next) => {
      return res.redirect("/account/login")
     }
     res.locals.accountData = accountData
-    res.locals.loggedin = 1
+    res.locals.loggedIn = 1
+    res.locals.account_firstname = accountData?.account_firstname ?? "";
+    res.locals.account_lastname = accountData?.account_lastname ?? "";
+    res.locals.account_email = accountData?.account_email ?? "";
+    res.locals.account_type = accountData?.account_type ?? "None";
+    res.locals.account_id = accountData?.account_id  ?? -1
     next()
    })
  } else {
@@ -145,10 +179,55 @@ Util.checkJWTToken = (req, res, next) => {
 }
 
 /* ****************************************
+* Middleware to create navigation
+**************************************** */
+Util.attachNav = async (req, res, next) => {
+  res.locals.nav = await Util.getNav();
+  next();
+}
+
+/* ****************************************
+ *  Check Account has Employee or Admin privilege
+ * ************************************ */
+
+Util.checkAccount = async (req, res, next) => {
+ const token = req.cookies.jwt
+ if (!token)
+ {
+    req.flash("notice", "Please log in");
+    return res.redirect("/account/login"); 
+ }
+ try{
+  const accountData = await verifyToken(token)
+  const role = accountData.account_type
+  if (role != "Admin" && role != "Employee")
+  {
+    req.flash("notice","Your account does not have the privileges to access the previous page")
+    return res.redirect("/account/login")
+  }
+  next()  
+ }
+ catch(err)
+ {
+    req.flash("notice", "Please log in");
+    return res.redirect("/account/login"); 
+ }
+}
+
+function verifyToken(token)
+{
+  return new Promise((resolve, reject) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
+      if (err) return reject(err);
+      resolve(decoded);
+    });
+  });
+}
+/* ****************************************
  *  Check Login
  * ************************************ */
  Util.checkLogin = (req, res, next) => {
-  if (res.locals.loggedin) {
+  if (res.locals.loggedIn) {
     next()
   } else {
     req.flash("notice", "Please log in.")

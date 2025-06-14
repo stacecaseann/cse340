@@ -7,15 +7,10 @@
 
 <%- messages() %>
 
-<% if (errors) { %>
-  <ul class="notice">
- <% errors.array().forEach(error => { %>
-   <li><%= error.msg %></li>
-<%  }) %>
- </ul>
-<% } %>
+<h2>Update Account</h2>
 
-<form method="post" action="/account/register">
+<div class="account-update">
+<form method="post" action="/account/update">
     <fieldset>
         <label>First name<span class="required">*</span>
         <input
@@ -49,19 +44,29 @@
             title="Enter your email address" 
             placeholder="Enter a valid email address">
         </label>
+        <input type="submit" value="Update" />
+      <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
+    </fieldset>
+</form>                            
+</div>
+
+<h2>Update Password</h2>
+<p>This will change your password</p>
+<p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
+<form action="/account/update-password" method="post">
+    <fieldset>
         <label>Password<span class="required">*</span>
-            <p>Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character</p>
-            <input type="password" name="account_password" 
-            id="accountPassword" 
-            required          
-            autocomplete="current-password" 
-            title="Enter your password"
-            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$"             
+            <input type="password" name="account_password" id="accountPassword" required autocomplete="current-password" title="Enter your password"
+            pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$" 
             />
         </label>
-        <input type="submit" value="Register" />
+        <input type="submit" value="Update Password" />
+              <input type="hidden" name="account_id"
+        <% if(locals.account_id) { %> value="<%= locals.account_id %>"
+        <% } %>>
     </fieldset>
 </form>
-<%# 
-https://www.youtube.com/watch?v=4vIkaZ1qb74&t=48s
- %>
+
+

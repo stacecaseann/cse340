@@ -10,10 +10,9 @@ console.log(upgradesData.upgrades)
 //basecontroller would be the class name
 //buildHome would be the method
 baseController.buildHome = async function(req, res){
-  const nav = await utilities.getNav()
   //notice = type of message
   //added as a class to the unordered list. write css rules using these classes to style the messages
-  res.render("index", {title: "Home", nav,
+  res.render("index", {title: "Home", 
         reviews : reviewsData.reviews,
     upgrades: upgradesData.upgrades,
     errors: null,

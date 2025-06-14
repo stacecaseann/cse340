@@ -1,24 +1,18 @@
-const utilities = require(".")
 const { body, validationResult } = require("express-validator")
 const validate = {}
+
 
 /*  **********************************
   *  Registration Data Validation Rules
   * ********************************* */
   validate.registrationRules = () => {
-    return [
-      // valid email is required and cannot already exist in the DB
-      body("account_email")
-      .trim()
-      .escape()
-      .notEmpty()
-      .isEmail()
-      .normalizeEmail() // refer to validator.js docs
-      .withMessage("A valid email is required."),
+    return [      
       // password is required and must be strong password
       body("account_password")
         .trim()
-        .notEmpty(),
+        .notEmpty()
+        .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{12,}$/)       
+        .withMessage("Password does not meet requirements."),
     ]
   }
 
@@ -26,17 +20,16 @@ const validate = {}
   /* ******************************
  * Check data and return errors or continue to registration
  * ***************************** */
-validate.checkAccountData = async (req, res, next) => {
+validate.checkRegData = async (req, res, next) => {
 
     //js destructuring method
-  const { account_email } = req.body
+  const { account_id } = req.body
   let errors = []
   errors = validationResult(req)
   if (!errors.isEmpty()) {
-    res.render("account/login", {
+    res.render("account/update/" + {account_id}, {
       errors,
-      title: "Login",
-      account_email,
+      title: "Update Account"
     })
     return
   }
