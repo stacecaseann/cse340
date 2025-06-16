@@ -13,6 +13,7 @@ const static = require("./routes/static")
 const inventoryRoute = require("./routes/inventoryRoute")
 const invDetailRoute = require("./routes/inventoryDetailRoute")
 const managementRoute = require("./routes/managementRoute")
+const searchRoute = require("./routes/searchRoute")
 const mockErrorRoute = require("./routes/mockErrorRoute")
 const baseController = require("./controllers/baseController")
 const utilities = require("./utilities/")
@@ -49,6 +50,9 @@ resave: true,//bc we are using "flash messages', usually it's false
 saveUninitialized: true,
 name: 'sessionId',//name of the unique session id
 }))
+
+//test for being able to use module js
+app.use(express.static('public'));
 
 //Express Messages Middleware
 app.use(require('connect-flash')())
@@ -95,6 +99,8 @@ app.use("/account", accountRoute)
 //Inv Management route
 app.use("/inv", managementRoute)
 
+//Search route
+app.use("/search", searchRoute)
 
 
 // File Not Found Route - must be last route in list
