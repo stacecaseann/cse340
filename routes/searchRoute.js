@@ -6,4 +6,6 @@ const utilities = require("../utilities/")
 
 router.get("/", utilities.handleErrors(searchController.buildSearch))
 
+router.post("/", utilities.handleErrors(searchController.searchInventory))
+
 module.exports = router;

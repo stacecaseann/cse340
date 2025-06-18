@@ -110,6 +110,23 @@ Util.buildClassificationList = async function (classification_id = null) {
     return classificationList
   }
 
+  Util.buildYearList = async function (label, fieldName, fieldId, selected=null) {
+    let yearSelect = `<label>${label}`
+    yearSelect += `<select name="${fieldName}" id="${fieldId}" required>`
+
+    for(let i = 1950; i <= 2025; i++)
+    {
+      yearSelect += `<option value="${i}" `
+      if(selected != null && selected == i)
+      {
+        yearSelect += " selected "
+      }
+      yearSelect += ">" + i + "</option>"
+    }
+    yearSelect += "</select></label>"
+    return yearSelect
+  }
+  
   function verifyJwt(token, secret)
   {
     return new Promise((resolve, reject) => {

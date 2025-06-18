@@ -9,6 +9,13 @@ async function getClassifications(){
     return await pool.query("SELECT * FROM public.classification ORDER BY classification_name")
 }
 
+/* ************
+* Get all make data
+* ************** */
+async function getMake(){
+    return await pool.query("select distinct inv_make from inventory order by inv_make")
+}
+
 /* ***************************
  *  Get all inventory items and classification_name by classification_id
  * ************************** */
@@ -173,13 +180,64 @@ async function updateInventory(
 }
 
 
+
+
+/* ***************************
+ *  Update Inventory Data
+ * ************************** */
+async function searchInventory(
+  inv_make,//[1,2]
+  min_price,
+  max_price,
+  min_year,
+  max_year,
+  search_text
+  // inv_model,
+  // inv_description,
+  // inv_image,
+  // inv_thumbnail,
+  // inv_price,
+  // inv_year,
+  // inv_miles,
+  // inv_color,
+  // classification_id
+) {
+  try {
+
+    let sql =
+      "SELECT * FROM public.Inventory WHERE inv_price >= $1 and inv_price <= $2 and inv_year >= $3 and inv_year <= $4"
+    let values = [min_price, max_price, min_year, max_year]
+    let variableCnt = 4
+    if (inv_make != null && inv_make.length > 0)
+    {
+       const makeValues = inv_make.map((_,i) => `$${i+variableCnt+1}`).join(', ')
+       sql += ` AND inv_make IN (${makeValues})`
+       values.push(...inv_make);
+       variableCnt += inv_make.length
+    }
+    if (search_text !== "")
+    {
+      const searchText = search_text.toUpperCase()
+      sql += ` AND (UPPER(inv_description) like '%${searchText}%' 
+      OR UPPER(inv_make) like '%${searchText}%' 
+      OR UPPER(inv_model) like '%${searchText}%'
+      OR UPPER(inv_color) like '%${searchText}%')`
+    }
+    const data = await pool.query(sql, values)
+    return data.rows
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+
 module.exports = {getClassifications, 
+  getMake,
   getInventoryByClassificationId,
   checkExistingInventory,
   addToInventory,
   removeInventoryById,
   getInventoryById,
-  updateInventory
+  updateInventory,
+  searchInventory
 }
-
-

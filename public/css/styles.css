@@ -301,6 +301,9 @@ footer a {
   display: grid;
   grid-template-columns: max-content 1fr;
 }
+.search-results{
+  display: flex;
+}
 .toggle-filter
 {
   font-size: 1.2em;

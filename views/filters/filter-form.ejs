@@ -1,0 +1,8 @@
+<form method="post" id="search-form" action="/search">
+ <%- include('../filters/filter-panel', {title: 'Search', filterId: 'search', formPartial: '../filters/text' }) %>
+ <%- include('../filters/filter-panel', {title: 'Price Range', filterId: 'price', formPartial: '../filters/price' }) %>
+ <%- include('../filters/filter-panel', {title: 'Make',filterId: 'make', formPartial: '../filters/make' }) %>
+ <%- include('../filters/filter-panel', {title: 'Year',filterId: 'year', formPartial: '../filters/year' }) %>
+ <input type="submit" name="submit" value="Search Inventory" />
+</form>
+<script src="/js/toggle-filter-view.js"></script>
