@@ -11,6 +11,11 @@
     {
         order: 1;
     }    
+    .search-inventory{
+  display: grid;
+  grid-template-columns: max-content 1fr;
+}
+
     .reviews
     {
         order: 2

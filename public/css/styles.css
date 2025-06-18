@@ -295,15 +295,13 @@ footer a {
   font-size: 1.5rem;
   color: red;
 }
-
-/********** Filters/Search ****************/
 .search-inventory{
   display: grid;
-  grid-template-columns: max-content 1fr;
+  grid-template-columns: 1fr;
 }
-.search-results{
-  display: flex;
-}
+
+/********** Filters/Search ****************/
+
 .toggle-filter
 {
   font-size: 1.2em;
@@ -317,7 +315,7 @@ footer a {
   justify-content: center;
 }
 .all-filter-panel{
-  max-height: 70vh;
+  max-height: 90vh;
   overflow: auto;
 
 } 
